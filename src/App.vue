@@ -1,13 +1,26 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <el-container style="height: 100%;">
+      <el-header>
+        <page-header/>
+      </el-header>
+      <router-view></router-view>
+    </el-container>
   </div>
 </template>
 
 <script>
+import PageHeader from './components/PageHeader'
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    'page-header': PageHeader
+  },
+  methods: {
+    menuSelected (index, indexPath) {
+      console.log(index)
+    }
+  }
 }
 </script>
 
@@ -18,6 +31,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
