@@ -38,6 +38,9 @@
                             <i class="el-icon-menu"></i>
                             <span>系统信息</span>
                         </template>
+                        <el-menu-item index="3-1">
+                                <span>API访问统计</span>
+                        </el-menu-item>
                     </el-submenu>
                 </el-menu>
             </el-aside>
@@ -49,7 +52,6 @@
 </template>
 
 <script>
-import UserTable from '@/components/UserTable'
 export default {
   data () {
     const item = {
@@ -69,6 +71,10 @@ export default {
         routeName = 'Users'
       } else if (index === '1-2') {
         routeName = 'AddUser'
+      } else if (index === '2-1') {
+        routeName = 'Movies'
+      } else if (index === '2-2') {
+        routeName = 'AddMovie'
       }
 
       this.$router.push({

@@ -1,15 +1,15 @@
 <template>
     <div style="height: 100%">
         <el-row type="flex" justify="space-between" align="middle" style="height: 100%">
-            <el-col :span="4">
-                <span class="page-logo">i<span style="color: #409EFF">Movie<span style="color: #bbbbbb"> 后台管理系统</span></span></span>
+            <el-col :span="4" >
+                <span class="page-logo" @click="pageLogoClicked">i<span style="color: #409EFF">Movie<span style="color: #bbbbbb"> 后台管理系统</span></span></span>
             </el-col>
 
             <el-col :span="4">
                 <div class="user-info">
                     <img class="user-logo" v-bind:src="imageSrc"/>
                     <el-dropdown @command="handleCommand">
-                        <span class="el-dropdown-link user-name" type="text">用户名</span>
+                        <span class="el-dropdown-link user-name" type="text">用户名<i class="el-icon-arrow-down el-icon--right"/></span>
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item command="changeAccount">切换账号</el-dropdown-item>
                             <el-dropdown-item style="color: #F56C6C" divided command="logout">退出登录</el-dropdown-item>
@@ -36,6 +36,12 @@ export default {
       } else if (command === 'logout') {
 
       }
+    },
+    pageLogoClicked () {
+      console.log('page logo clicked')
+      this.$router.push({
+        name: 'Users'
+      })
     }
   }
 }

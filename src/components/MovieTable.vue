@@ -7,31 +7,41 @@
         >
             <el-table-column type="expand">
                 <template slot-scope="props">
-                    <el-form label-position="left" inline class="table-expand">
-                        <el-form-item label="用户ID">
+                    <el-form label-position="left" inline class="table-expand" :form="formData">
+                        <el-form-item label="电影ID">
                             <span>{{ props.row.id }}</span>
                         </el-form-item>
-                        <el-form-item label="用户名">
-                            <span v-if="!isEditing">{{ props.row.name }}</span>
-                            <el-input v-if="isEditing"  v-model="props.row.name"></el-input>
-                        </el-form-item>
-                        <el-form-item label="注册日期">
+                        <el-form-item label="添加日期">
                             <span>{{ props.row.name }}</span>
                         </el-form-item>
-                        <el-form-item label="邮件">
+                        <el-form-item label="电影评分">
+                            <span>{{ props.row.name }}</span>
+                        </el-form-item>
+                        <el-form-item label="电影评分人数">
+                            <span>{{ props.row.name }}</span>
+                        </el-form-item>
+                        <el-form-item label="电影名">
                             <span v-if="!isEditing">{{ props.row.name }}</span>
                             <el-input v-if="isEditing"  v-model="props.row.name"></el-input>
                         </el-form-item>
-                        <el-form-item label="个性签名">
+                        <el-form-item label="电影类型">
+                            <span v-if="!isEditing">{{ props.row.name }}</span>
+                            <el-input v-if="isEditing"  v-model="props.row.name"></el-input>
+                        </el-form-item>
+                        <el-form-item label="电影演员">
+                            <span v-if="!isEditing">{{ props.row.name }}</span>
+                            <el-input v-if="isEditing"  v-model="props.row.name"></el-input>
+                        </el-form-item>
+                        <el-form-item label="电影详情">
                             <span v-if="!isEditing">{{ props.row.name }}</span>
                             <el-input v-if="isEditing"  v-model="props.row.name"></el-input>
                         </el-form-item>
                     </el-form>
                 </template>
             </el-table-column>
-            <el-table-column label="用户ID" prop="id"/>
-            <el-table-column label="用户名" prop="name"/>
-            <el-table-column label="注册时间" prop="shop"/>
+            <el-table-column label="电影ID" prop="id"/>
+            <el-table-column label="电影名" prop="name"/>
+            <el-table-column label="添加时间" prop="shop"/>
             <el-table-column label="操作">
                 <template slot-scope="scope">
                     <div v-if="!isEditing">
@@ -45,19 +55,28 @@
                     <!-- 保存修改时弹出，确认更改 -->
                     <el-dialog title="修改用户信息" :visible.sync="dialogFormVisible">
                         <el-form :form="formData" class="dialog-form">
-                            <el-form-item label="用户ID">
+                            <el-form-item label="电影ID">
                                 <span>{{ formData.id }}</span>
                             </el-form-item>
-                            <el-form-item label="用户名">
+                            <el-form-item label="添加日期">
                                 <span>{{ formData.name }}</span>
                             </el-form-item>
-                            <el-form-item label="注册日期">
+                            <el-form-item label="电影评分">
                                 <span>{{ formData.name }}</span>
                             </el-form-item>
-                            <el-form-item label="邮件">
+                            <el-form-item label="电影评分人数">
                                 <span>{{ formData.name }}</span>
                             </el-form-item>
-                            <el-form-item label="个性签名">
+                            <el-form-item label="电影名">
+                                <span>{{ formData.name }}</span>
+                            </el-form-item>
+                            <el-form-item label="电影类型">
+                                <span>{{ formData.name }}</span>
+                            </el-form-item>
+                            <el-form-item label="电影演员">
+                                <span>{{ formData.name }}</span>
+                            </el-form-item>
+                            <el-form-item label="电影详情">
                                 <span>{{ formData.name }}</span>
                             </el-form-item>
                         </el-form>
@@ -201,8 +220,7 @@ export default {
       this.$refs.table.toggleRowExpansion(row, false)
     },
     saveBtnClicked (index, row) {
-      this.formData.id = row.id
-      this.formData.name = row.name
+      this.formData = row
       this.dialogFormVisible = true
     },
     comfirmChangeBtnClicked () {
@@ -217,7 +235,7 @@ export default {
     font-size: 0;
 }
 .table-expand label {
-    width: 90px;
+    width: 100px;
     color: #99a9bf;
 }
 .table-expand .el-form-item {
@@ -227,7 +245,7 @@ export default {
 }
 
 .dialog-form label{
-    width: 90px;
+    width: 100px;
     color: #99a9bf;
 }
 
