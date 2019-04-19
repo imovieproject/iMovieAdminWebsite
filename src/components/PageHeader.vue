@@ -9,7 +9,7 @@
                 <div class="user-info">
                     <img class="user-logo" v-bind:src="imageSrc"/>
                     <el-dropdown @command="handleCommand">
-                        <span class="el-dropdown-link user-name" type="text">用户名<i class="el-icon-arrow-down el-icon--right"/></span>
+                        <span class="el-dropdown-link user-name" type="text">{{ adminName }}<i class="el-icon-arrow-down el-icon--right"/></span>
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item command="changeAccount">切换账号</el-dropdown-item>
                             <el-dropdown-item style="color: #F56C6C" divided command="logout">退出登录</el-dropdown-item>
@@ -32,16 +32,30 @@ export default {
   methods: {
     handleCommand (command) {
       if (command === 'changeAccount') {
-
+        this.$router.push({
+          name: 'LoginPage'
+        })
       } else if (command === 'logout') {
-
+        this.$store.commit('setIsLogin', false)
+        this.$router.push({
+          name: 'LoginPage'
+        })
       }
     },
     pageLogoClicked () {
       console.log('page logo clicked')
+      this.$store.commit('setActiveIndex', '1-1')
+      console.log(this.$store.getters.getActiveIndex)
       this.$router.push({
         name: 'Users'
       })
+    }
+  },
+
+  computed: {
+    adminName () {
+      console.log(this.$store.getters.getLoginAdmin)
+      return this.$store.getters.getLoginAdminName
     }
   }
 }

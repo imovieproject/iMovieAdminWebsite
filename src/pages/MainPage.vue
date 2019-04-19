@@ -3,7 +3,7 @@
         <el-container style="height: 100%; border: 1px solid #eee">
             <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
                 <el-menu
-                    default-active="1-1"
+                    :default-active="this.$store.getters.getActiveIndex"
                     class="el-menu-vertical-demo"
                     @select="menuSelected"
                 >
@@ -52,6 +52,7 @@
 </template>
 
 <script>
+
 export default {
   data () {
     const item = {
@@ -60,13 +61,18 @@ export default {
       address: '上海市普陀区金沙江路 1518 弄'
     }
     return {
-      tableData: Array(20).fill(item)
+      tableData: Array(20).fill(item),
+      activeIndex: ''
     }
+  },
+  created () {
+    this.activeIndex = this.$store.getters.getActiveIndex
   },
   methods: {
     menuSelected (index, indexPath) {
-      console.log(index)
       var routeName = ''
+      this.$store.commit('setActiveIndex', index)
+      console.log(this.$store.getters.getActiveIndex)
       if (index === '1-1') {
         routeName = 'Users'
       } else if (index === '1-2') {
@@ -75,12 +81,16 @@ export default {
         routeName = 'Movies'
       } else if (index === '2-2') {
         routeName = 'AddMovie'
+      } else if (index === '3-1') {
+        routeName = 'APIStat'
       }
 
       this.$router.push({
         name: routeName
       })
     }
+  },
+  computed: {
   }
 }
 </script>

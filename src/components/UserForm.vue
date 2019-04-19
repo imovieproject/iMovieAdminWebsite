@@ -32,6 +32,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   data () {
     return {
@@ -74,7 +76,14 @@ export default {
           confirmButtonText: '确认',
           cancelButtonText: '取消',
           callback: (action, instance) => {
-
+            axios
+              .post('/api/adduser', this.formData)
+              .then(response => {
+                this.$message({
+                  type: 'success',
+                  message: '已成功添加用户'
+                })
+              })
           }
         })
       }

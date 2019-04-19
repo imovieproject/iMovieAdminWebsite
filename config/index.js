@@ -10,7 +10,30 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: { // 用来解决跨域问题
+      // api服务器
+      '/api': {
+        // 豆瓣api服务器
+        // target: 'http://api.douban.com/v2',
+
+        // 本地开发api服务器
+        target: 'http://192.168.140.170:5200/adminapi/v1',
+
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': '/'
+        }
+      },
+      // 静态资源服务器
+      '/static': {
+        target: 'http://192.168.140.170:5200/',
+
+        changeOrigin: true,
+        pathRewrite: {
+          '^/static': '/'
+        }
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
